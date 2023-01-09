@@ -228,7 +228,6 @@ input.content {
 a, a:hover {
     color: rgb(0, 0, 0);
     cursor: pointer;
-    width: 26px;
 }
 
 .content {
