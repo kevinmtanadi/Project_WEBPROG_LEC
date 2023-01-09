@@ -23,13 +23,12 @@ class UserController extends Controller
             ->get();
         $friends_id = [];
         foreach ($friends as $friend) {
-            array_push($friends_id, $friend);
+            array_push($friends_id, $friend->id);
         }
 
         $posts = Post::where('user_id', $user->id)
-            ->orWhereIn('user_id', $friends_id)
+            ->orWhereIn('user_id', $friends_id)->orderBy('posted_at', 'desc')
             ->get();
-
 
         return view('home', ['posts' => $posts]);
     }

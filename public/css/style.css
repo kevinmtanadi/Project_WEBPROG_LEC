@@ -269,3 +269,9 @@ textarea {
     font-size: 0.9rem;
     color: #757575;
 }
+
+.people-profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}

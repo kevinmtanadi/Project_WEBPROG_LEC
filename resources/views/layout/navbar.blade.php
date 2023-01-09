@@ -5,7 +5,7 @@
                 <div class="col d-flex align-items-center">
                     <div class="logo me-3">
                         <a href="/">
-                            <img width="30px" src="{{ Storage::url('public/images/logo/Icon Circial.svg') }}" alt="">
+                            <img width="30px" src="{{ Storage::url('public/images/logo/circial.svg') }}" alt="">
                         </a>
                     </div>
                     <form action="/searchPeople">

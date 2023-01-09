@@ -10,4 +10,6 @@ class Friend extends Model
     use HasFactory;
 
     protected $table = 'friend';
+
+
 }
