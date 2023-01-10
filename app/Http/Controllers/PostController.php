@@ -70,4 +70,10 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+
+    public function deletePost($id) {
+        Post::where('id', $id)->delete();
+
+        return redirect()->back();
+    }
 }

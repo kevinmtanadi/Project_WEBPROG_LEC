@@ -29,7 +29,7 @@
                     </button>
                     <div class="dropdown">
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                          <li><a class="dropdown-item" href="/profile/{{Auth::user()->id}}">Profile</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
@@ -40,7 +40,7 @@
     </nav>
 
     <div class="modal fade" id="createpost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form class="text-center" method="POST" enctype="multipart/form-data" action="/createpost">
                     @csrf

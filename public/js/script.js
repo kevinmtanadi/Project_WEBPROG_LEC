@@ -57,3 +57,28 @@ function auto_grow(element) {
     element.style.height = "5px";
     element.style.height = (element.scrollHeight)+"px";
 }
+
+const profilePic = document.querySelector('.profilePic');
+const saveBtn = document.querySelector('.save');
+const takeInput = document.querySelector('.take-input');
+
+function resetProfilePicModal() {
+    saveBtn.style.display = 'none';
+    takeInput.style.display = 'block';
+    profilePic.files[0] = null;
+}
+
+profilePic.addEventListener('change', () => {
+
+    let fileType = profilePic.files[0].type;
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+    if (validExtensions.includes(fileType)) {
+        saveBtn.style.display = 'block';
+        takeInput.style.display = 'none';
+
+    }
+    else {
+        alert("File type unsupported!");
+    }
+});

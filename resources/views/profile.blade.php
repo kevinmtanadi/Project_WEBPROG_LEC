@@ -16,6 +16,7 @@
                 <div class="col-9">
                     <div class="d-flex justify-content-between mb-3">
                         <span class="fs-3 fw-light">{{$account->name}}</span>
+                        @if (Auth::user()->id != $account->id)
                         @php
                            $friends = Auth::user()->friends;
                            $friends_id = [];
@@ -38,7 +39,11 @@
                                 <a class="btn btn-3" href="/addFriend/{{$account->id}}">Add Friend</a>
                             @endif
                         </div>
-
+                        @else
+                        <div class="d-flex align-items-center">
+                            <a href="/updateProfile"><i class="fa-solid fa-gear fs-4 text-secondary"></i></a>
+                        </div>
+                        @endif
                     </div>
                     <div class="row align-items-end align-items-center">
                         <div class="col-2">

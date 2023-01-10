@@ -189,6 +189,16 @@ img.profile-3 {
     object-fit: cover;
 }
 
+img.profile-4 {
+    width: 56px;
+    height: 56px;
+    background-color: #757575;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+}
+
+
 .navbar {
     border-bottom: 1px solid #bebebe;
 }
@@ -228,6 +238,10 @@ a {
 }
 
 input.content {
+    display: none;
+}
+
+.profilePic {
     display: none;
 }
 

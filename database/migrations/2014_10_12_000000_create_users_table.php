@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('password');
             $table->date('dob');
             $table->string('profile_pic');
-            $table->string('banner_pic')->nullable();
             $table->string('role')->default('member');
             $table->timestamp('created_at');
             $table->rememberToken();

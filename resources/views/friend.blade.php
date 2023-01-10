@@ -13,10 +13,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-2 d-flex justify-content-center">
-                            <img class="people-profile" src="{{Storage::url('public/images/profile/'.$friend->friend->profile_pic)}}" alt="test">
+                            <a href="/profile/{{$friend->friend->id}}">
+                                <img class="people-profile" src="{{Storage::url('public/images/profile/'.$friend->friend->profile_pic)}}" alt="test">
+                            </a>
                         </div>
                         <div class="col-6 d-flex align-items-center">
-                            <span class="fw-semibold">{{ $friend->friend->name }}</span>
+                            <a href="/profile/{{$friend->friend->id}}">
+                                <span class="fw-semibold">{{ $friend->friend->name }}</span>
+                            </a>
                         </div>
                         <div class="col-4 d-flex justify-content-end">
                             <div class="text-end my-auto">

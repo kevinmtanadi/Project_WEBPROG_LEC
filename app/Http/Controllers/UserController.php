@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -33,7 +34,17 @@ class UserController extends Controller
         return view('home', ['posts' => $posts]);
     }
 
-    public function homepage(Request $req) {
+    public function adminPage() {
+        $posts = Post::orderBy('posted_at', 'desc')->get();
+
+        return view('admin', ['posts' => $posts]);
+    }
+
+    public function homepage() {
+        if (Auth::user()->role == 'admin') {
+            return $this->adminPage();
+        }
+
         if (Auth::check()) {
             return $this->showPost();
         }
@@ -68,7 +79,6 @@ class UserController extends Controller
             'gender' => $req->gender,
             'dob' => $req->dob,
             'profile_pic' => 'profile.jpg',
-            'banner_pic' => 'banner.jpg',
             'created_at' => Carbon::now(),
         ]);
 
@@ -111,8 +121,69 @@ class UserController extends Controller
     }
 
     // ---------------------------------------------------------------- UPDATE ---------------------------------------------------------------
-    public function update(Request $req) {
+    public function updateProfilePage() {
+        return view('update_profile');
+    }
 
+    public function updateProfile(Request $req) {
+        $rules = [
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email,'.Auth::user()->id,
+            'phone' => 'required',
+            'gender' => 'required',
+            'dob' => 'required'
+        ];
+
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $user = Auth::user();
+
+        User::where('id', $user->id)->update([
+            'name' => $req->name,
+            'email' => $req->email,
+            'phone' => $req->phone,
+            'gender' => $req->gender,
+            'dob' => $req->dob,
+        ]);
+
+        return redirect()->back();
+
+    }
+
+    public function changeProfilePic(Request $req) {
+        $new_image = $req->file('profilePic');
+
+        $validator = Validator::make($req->all(), [
+            'profilePic' => 'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $filename = 'profilepic_'.time().'.'.$new_image->getClientOriginalExtension();
+
+        $user = Auth::user();
+
+        // Delete foto lama user, apabila foto tersebut bukan foto default
+        if ($user->profile_pic != 'profile.jpg') {
+            Storage::delete('public/images/profile'.$user->profile_pic);
+        }
+
+        // Simpan foto baru user
+        Storage::putFileAs('public/images/profile', $new_image, $filename);
+
+        // Update data user di database
+        User::where('id', $user->id)->update([
+            'profile_pic' => $filename,
+        ]);
+
+        return redirect()->back();
     }
 
 }
