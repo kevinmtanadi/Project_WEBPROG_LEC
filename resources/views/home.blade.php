@@ -9,17 +9,19 @@
 
     <div class="mx-4 my-3">
         <div class="row">
-            <div class="col-4">
+            <div class="col-xl-4 col-lg-3 col-0">
 
             </div>
-            <div class="col-4 posts">
+            <div class="col-xl-4 col-lg-6 col-sm-8 col-12 posts">
                 @foreach ($posts as $post)
                     <div class="card mb-3">
                         <div class="profile d-flex">
-                            <div class="p-2">
-                                <img class="profile mx-2" src="{{Storage::url('public/images/profile/'.$post->user->profile_pic)}}" alt="">
-                                {{ $post->user->name }}
-                            </div>
+                            <a href="/profile/{{$post->user->id}}">
+                                <div class="p-2">
+                                    <img class="profile mx-2" src="{{Storage::url('public/images/profile/'.$post->user->profile_pic)}}" alt="">
+                                    {{ $post->user->name }}
+                                </div>
+                            </a>
                         </div>
                         <div class="">
                             <img class="img-fluid w-100" src="{{Storage::url('public/images/post/'.$post->content_url)}}" alt="">
@@ -47,7 +49,7 @@
                                     </button>
                                 </div>
                                 <div class="col d-flex flex-row-reverse align-items-center">
-                                    test
+
                                 </div>
                             </div>
                             <div class="status">
@@ -68,13 +70,13 @@
                                         $time = floor($time_passed / (60)).'m';
                                     }
                                     else if ($time_passed < 24*60*60) {
-                                        $time = floor($time_passed / (24*60)).'h';
+                                        $time = floor($time_passed / (60*60)).'h';
                                     }
                                     else if ($time_passed < 7*24*60*60) {
-                                        $time = floor($time_passed / (7*24*60)).'d';
+                                        $time = floor($time_passed / (24*60*60)).'d';
                                     }
                                     else {
-                                        $time = dd($post->posted_at->toDateString());
+                                        $time = date('j M Y', strtotime($post->posted_at));
                                     }
                                     @endphp
                                     <span class="comment-status">{{ $time }}</span>
@@ -83,7 +85,7 @@
                             <div class="comment mt-3">
                                 <form action="/addComment/{{$post->id}}" method="POST" class="mt-3 d-flex">
                                     @csrf
-                                    <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);"></textarea>
+                                    <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);" placeholder="Add your comment"></textarea>
                                     <div class="d-flex ms-2">
                                         <input class="my-auto border-0 hover-none focus-none text-color-3" type="submit" value="Post">
                                     </div>
@@ -99,12 +101,40 @@
                                                     <div class="comment-profile d-flex">
                                                         <div class="py-2">
                                                             <img class="profile mx-2 my-auto" src="{{Storage::url('public/images/profile/'.$post->user->profile_pic)}}" alt="">
-                                                            {{ $post->user->name }}
+                                                            <span class="fw-semibold">
+                                                                {{ $post->user->name }}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="comments">
-                                                        @foreach ($post->comments as $comment)
                                                         <div class="row py-2">
+                                                            <div class="col-1 me-3">
+                                                                <img class="profile mx-2" src="{{Storage::url('public/images/profile/'.$post->user->profile_pic)}}" alt="">
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <div class="comment-content"><span class="fw-semibold">{{$post->user->name}}</span> {{$post->caption}}</div>
+                                                                @php
+                                                                $time_passed = \Carbon\Carbon::now()->diffInSeconds($post->posted_at);
+                                                                $time = '';
+                                                                if ($time_passed < 60) {
+                                                                    $time = floor($time_passed).'s';
+                                                                }
+                                                                else if ($time_passed < 60*60){
+                                                                    $time = floor($time_passed / (60)).'m';
+                                                                }
+                                                                else if ($time_passed < 24*60*60) {
+                                                                    $time = floor($time_passed / (60*60)).'h';
+                                                                }
+                                                                else if ($time_passed < 7*24*60*60) {
+                                                                    $time = floor($time_passed / (24*60*60)).'d';
+                                                                }
+                                                                else {
+                                                                    $time = date('j M Y', strtotime($post->posted_at));
+                                                                }
+                                                                @endphp
+                                                                <span class="comment-status me-2">{{ $time }}</span>
+                                                            </div>
+                                                            @foreach ($post->comments as $comment)
                                                             <div class="col-1 me-3">
                                                                 <img class="profile mx-2" src="{{Storage::url('public/images/profile/'.$comment->user->profile_pic)}}" alt="">
                                                             </div>
@@ -120,13 +150,13 @@
                                                                     $time = floor($time_passed / (60)).'m';
                                                                 }
                                                                 else if ($time_passed < 24*60*60) {
-                                                                    $time = floor($time_passed / (24*60)).'h';
+                                                                    $time = floor($time_passed / (60*60)).'h';
                                                                 }
                                                                 else if ($time_passed < 7*24*60*60) {
-                                                                    $time = floor($time_passed / (7*24*60)).'d';
+                                                                    $time = floor($time_passed / (24*60*60)).'d';
                                                                 }
                                                                 else {
-                                                                    $time = dd($post->posted_at->toDateString());
+                                                                    $time = date('j M Y', strtotime($post->posted_at));
                                                                 }
                                                                 @endphp
                                                                 <div class="d-flex">
@@ -155,8 +185,9 @@
                                                                 </a>
                                                                 @endif
                                                             </div>
+                                                            @endforeach
                                                         </div>
-                                                        @endforeach
+
                                                     </div>
                                                     <div class="comment-info py-3 pe-3">
                                                         <div class="col d-flex align-items-center">
@@ -167,11 +198,11 @@
                                                                 }
                                                             @endphp
                                                             @if (in_array($post->id, $likedPost))
-                                                            <a href="/unlikeComment/{{$post->id}}" class="me-1">
+                                                            <a href="/unlikePost/{{$post->id}}" class="me-1">
                                                                 <i class="fa-solid fa-heart fs-4 text-danger"></i>
                                                             </a>
                                                             @else
-                                                            <a href="/likeComment/{{$post->id}}" class="me-1">
+                                                            <a href="/likePost/{{$post->id}}" class="me-1">
                                                                 <i class="fa-regular fa-heart fs-4"></i>
                                                             </a>
                                                             @endif
@@ -184,7 +215,7 @@
                                                         </div>
                                                         <form action="/addComment/{{$post->id}}" method="POST" class="mt-3 d-flex">
                                                             @csrf
-                                                            <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);"></textarea>
+                                                            <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);" placeholder="Add your comment"></textarea>
                                                             <div class="d-flex ms-2">
                                                                 <input class="my-auto border-0 hover-none focus-none text-color-3" type="submit" value="Post">
                                                             </div>
@@ -202,10 +233,15 @@
                     </div>
                 @endforeach
             </div>
-            <div class="col-4 text-end">
-                <h4>Friends</h4>
+            <div class="col-xl-3 col-lg-3 col-sm-4 col-0">
+                <h5 class="fw-semibold mb-2">Friends</h5>
                 @foreach (Auth::user()->friends as $friend)
-                    {{ $friend->name }}
+                <div class="d-flex align-items-center">
+                    <a href="/profile/{{$friend->friend->id}}">
+                        <img class="profile-2 me-2" src="{{Storage::url('public/images/profile/'.$friend->friend->profile_pic)}}" alt="">
+                        {{ $friend->friend->name }}
+                    </a>
+                </div>
                 @endforeach
             </div>
         </div>

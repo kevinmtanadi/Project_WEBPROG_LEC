@@ -23,7 +23,7 @@ class UserController extends Controller
             ->get();
         $friends_id = [];
         foreach ($friends as $friend) {
-            array_push($friends_id, $friend->id);
+            array_push($friends_id, $friend->friend->id);
         }
 
         $posts = Post::where('user_id', $user->id)

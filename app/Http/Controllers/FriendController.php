@@ -13,9 +13,15 @@ class FriendController extends Controller
 {
     //
 
+    public function showFriend() {
+        return view('friend');
+    }
+
     public function searchPeople(Request $req) {
         $search = $req->search;
-        $peoples = User::where('name', 'LIKE', "%$search%")->get();
+        $peoples = User::where('name', 'LIKE', "%$search%")
+                ->where('id', '!=', Auth::user()->id)
+                ->get();
 
         return view('peoples', ['peoples' => $peoples]);
     }
@@ -52,10 +58,7 @@ class FriendController extends Controller
                                 'user_id' => Auth::user()->id,
                                 'friend_id' => $friend_id
                             ]);
-                            return 'Friend request sent successfully';
                         }
-
-                        return 'Friend request has already sent before';
                     }
                     else {
                         // Apabila sudah ada friend request, maka hapus request tersebut dan tambahkan user tersebut menjadi teman
@@ -69,15 +72,42 @@ class FriendController extends Controller
                             'friend_id' => $friend_id
                         ]);
 
-                        return 'Friend has been added!';
+                        Friend::insert([
+                            'user_id' => $friend_id,
+                            'friend_id' => Auth::user()->id
+                        ]);
+
                     }
                 }
-                return 'Already friend-1';
             }
-
-            return 'Already friend-2';
         }
 
-        return 'Already friend-3';
+        return redirect()->back();
+    }
+
+    public function removeFriend($friend_id) {
+        $friend = Friend::where('user_id', Auth::user()->id)
+                ->where('friend_id', $friend_id)->first();
+
+        $friend_2 = Friend::where('user_id', $friend_id)
+                ->where('friend_id', Auth::user()->id)->first();
+
+
+        Friend::where('id', $friend->id)->delete();
+        Friend::where('id', $friend_2->id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function cancelFriendRequest($friend_id) {
+        FriendRequest::where('friend_id', $friend_id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function showProfile($id) {
+        $account = User::where('id', $id)->first();
+
+        return view('profile', ['account' => $account]);
     }
 }

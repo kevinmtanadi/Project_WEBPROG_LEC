@@ -171,6 +171,24 @@ img.profile {
     object-fit: cover;
 }
 
+img.profile-2 {
+    width: 35px;
+    height: 35px;
+    background-color: #757575;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+}
+
+img.profile-3 {
+    width: 150px;
+    height: 150px;
+    background-color: #757575;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+}
+
 .navbar {
     border-bottom: 1px solid #bebebe;
 }
@@ -275,3 +293,28 @@ textarea {
     height: 60px;
     border-radius: 50%;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns : repeat(3,1fr);
+    grid-gap: 10px;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-image {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:0.1s ease-in;
+}
+
+.grid-item:hover .grid-image {
+    transform : scale(1.1);
+    filter:brightness(0.6);
+    cursor: pointer;
+  }

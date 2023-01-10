@@ -35,6 +35,10 @@ Route::get('/logout', [UserController::class, 'logout']);
 // ---------------------------------------------------------------- FRIEND ----------------------------------------------------------------
 Route::get('/searchPeople', [FriendController::class, 'searchPeople']);
 Route::get('/addFriend/{friend_id}', [FriendController::class, 'sendFriendRequest']);
+Route::get('/removeFriend/{friend_id}', [FriendController::class, 'removeFriend']);
+Route::get('/cancelFriendRequest/{friend_id}', [FriendController::class, 'cancelFriendRequest']);
+Route::get('/friend', [FriendController::class, 'showFriend']);
+Route::get('/profile/{id}', [FriendController::class, 'showProfile']);
 
 // ---------------------------------------------------------------- HOMEPAGE ----------------------------------------------------------------
 Route::get('/', [UserController::class, 'homepage']);

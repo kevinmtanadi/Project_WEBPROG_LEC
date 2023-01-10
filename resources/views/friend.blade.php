@@ -2,25 +2,21 @@
 <html lang="en">
 <head>
     @include('layout.head')
-    <title>Peoples</title>
+    <title>Friends</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     @include('layout.navbar')
 
     <div class="container my-3 d-flex">
-        @foreach ($peoples as $people)
+        @foreach (Auth::user()->friends as $friend)
             <div class="card mx-auto" style="min-width: 600px">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-2 d-flex justify-content-center">
-                            <a href="/profile/{{$people->id}}">
-                                <img class="people-profile" src="{{Storage::url('public/images/profile/'.$people->profile_pic)}}" alt="test">
-                            </a>
+                            <img class="people-profile" src="{{Storage::url('public/images/profile/'.$friend->friend->profile_pic)}}" alt="test">
                         </div>
                         <div class="col-6 d-flex align-items-center">
-                            <a href="/profile/{{$people->id}}">
-                                <span class="fw-semibold">{{ $people->name }}</span>
-                            </a>
+                            <span class="fw-semibold">{{ $friend->friend->name }}</span>
                         </div>
                         <div class="col-4 d-flex justify-content-end">
                             <div class="text-end my-auto">
@@ -37,12 +33,12 @@
                                         array_push($friend_reqs_id, $friend_req->friend_id);
                                     }
                                 @endphp
-                                @if (in_array($people->id, $friends_id))
-                                    <a class="btn btn-danger" href="/removeFriend/{{$people->id}}">Unfriend</a>
-                                @elseif (in_array($people->id, $friend_reqs_id))
-                                    <a class="btn btn-secondary" href="/cancelFriendRequest/{{$people->id}}">Friend Request Sent</a>
+                                @if (in_array($friend->friend->id, $friends_id))
+                                    <a class="btn btn-danger" href="/removeFriend/{{$friend->id}}">Unfriend</a>
+                                @elseif (in_array($friend->friend->id, $friend_reqs_id))
+                                    <a class="btn btn-secondary" href="/cancelFriendRequest/{{$friend->id}}">Friend Request Sent</a>
                                 @else
-                                    <a class="btn btn-3" href="/addFriend/{{$people->id}}">Add Friend</a>
+                                    <a class="btn btn-3" href="/addFriend/{{$friend->id}}">Add Friend</a>
                                 @endif
                             </div>
                         </div>
