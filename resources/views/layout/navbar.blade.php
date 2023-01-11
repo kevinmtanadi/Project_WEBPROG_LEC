@@ -24,16 +24,31 @@
                     </button>
                 </div>
                 <div class="col d-flex flex-row-reverse align-items-center">
-                    <button class="profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="profile" src="{{Storage::url('public/images/profile/'.Auth::user()->profile_pic)}}" alt="Profile Pic">
-                    </button>
-                    <div class="dropdown">
-                        <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="/profile/{{Auth::user()->id}}">{{__('navbar.profile')}}</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="/logout">{{__('navbar.logout')}}</a></li>
-                        </ul>
+                    <div class="">
+                        <button class="profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="profile" src="{{Storage::url('public/images/profile/'.Auth::user()->profile_pic)}}" alt="Profile Pic">
+                        </button>
+                        <div class="dropdown">
+                            <ul class="dropdown-menu dropdown-menu-end">
+                              <li><a class="dropdown-item" href="/profile/{{Auth::user()->id}}">{{__('navbar.profile')}}</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/logout">{{__('navbar.logout')}}</a></li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="">
+                        <div class="dropdown-center me-3">
+                            <button type="button" class="btn btn-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ __('navbar.language')}}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/setLocale/en">English</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/setLocale/id">Indonesia</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -45,17 +60,17 @@
                 <form class="text-center" method="POST" enctype="multipart/form-data" action="/createpost">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title">Create new post</h5>
+                        <h5 class="modal-title">{{__('navbar.create_post')}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                             <input type="file" class="content" name="content" id="content">
-                            <label class="btn btn-3" for="content">Select an image to post!</label>
+                            <label class="btn btn-3" for="content">{{__('navbar.post_input')}}</label>
                     </div>
                     <div class="output" style="display: none">
                     </div>
                     <div class="caption py-3 px-3" style="display: none">
-                        <h5>Insert a Caption</h5>
+                        <h5>{{__('navbar.caption_input')}}</h5>
                         <textarea class="form-control px-2" name="caption" id="caption" cols="30" rows="10"></textarea>
                     </div>
 

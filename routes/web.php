@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// ---------------------------------------------------------------- LOCALIZATION --------------------------------------------------------
+Route::get('/setLocale/{locale}', [LocalizationController::class, 'setLocale'])->middleware('locale');
+
 // ---------------------------------------------------------------- ADMIN ONLY PAGE -----------------------------------------------------
 Route::get('/adminPage', [UserController::class, 'adminPage'])->middleware('admin');
 

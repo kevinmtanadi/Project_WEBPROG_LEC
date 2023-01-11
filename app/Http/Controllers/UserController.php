@@ -7,7 +7,9 @@ use App\Models\Friend;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -31,16 +33,21 @@ class UserController extends Controller
             ->orWhereIn('user_id', $friends_id)->orderBy('posted_at', 'desc')
             ->get();
 
+        App::setLocale(Session::get('mylocale'));
+
         return view('home', ['posts' => $posts]);
     }
 
     public function adminPage() {
+        App::setLocale(Session::get('mylocale'));
+
         $posts = Post::orderBy('posted_at', 'desc')->get();
 
         return view('admin', ['posts' => $posts]);
     }
 
     public function homepage() {
+        App::setLocale(Session::get('mylocale'));
         if (Auth::check()) {
             if (Auth::user()->role == 'admin') {
                 return $this->adminPage();
@@ -128,6 +135,7 @@ class UserController extends Controller
 
     // ---------------------------------------------------------------- UPDATE ---------------------------------------------------------------
     public function updateProfilePage() {
+        App::setLocale(Session::get('mylocale'));
         return view('update_profile');
     }
 

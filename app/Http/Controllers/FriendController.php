@@ -7,17 +7,23 @@ use App\Models\Friend;
 use App\Models\FriendRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class FriendController extends Controller
 {
     //
 
     public function showFriend() {
+        App::setLocale(Session::get('mylocale'));
+
         return view('friend');
     }
 
     public function searchPeople(Request $req) {
+        App::setLocale(Session::get('mylocale'));
+
         $search = $req->search;
         $peoples = User::where('name', 'LIKE', "%$search%")
                 ->where('id', '!=', Auth::user()->id)
@@ -107,6 +113,7 @@ class FriendController extends Controller
     }
 
     public function showProfile($id) {
+        App::setLocale(Session::get('mylocale'));
         $account = User::where('id', $id)->first();
 
         return view('profile', ['account' => $account]);
