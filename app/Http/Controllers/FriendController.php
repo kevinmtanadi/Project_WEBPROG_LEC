@@ -21,6 +21,7 @@ class FriendController extends Controller
         $search = $req->search;
         $peoples = User::where('name', 'LIKE', "%$search%")
                 ->where('id', '!=', Auth::user()->id)
+                ->where('role', '!=', 'admin')
                 ->get();
 
         return view('peoples', ['peoples' => $peoples]);

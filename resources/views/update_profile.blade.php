@@ -14,34 +14,34 @@
                 <tbody>
                     <tr>
                         <td class="text-end"><img class="profile" src="{{Storage::url('public/images/profile/'.Auth::user()->profile_pic)}}" alt=""></td>
-                        <td><button class="border-0 hover-none focus-none text-color-3 fw-semibold" type="button" data-bs-toggle="modal" data-bs-target="#profilePicModal" onclick="resetProfilePicModal();">Change profile picture</button></td>
+                        <td><button class="border-0 hover-none focus-none text-color-3 fw-semibold" type="button" data-bs-toggle="modal" data-bs-target="#profilePicModal" onclick="resetProfilePicModal();">{{__('unlogged.input.change_pic')}}</button></td>
                     </tr>
                     <tr>
-                        <td class="text-end"><label class="fw-semibold" for="name">Name</label></td>
+                        <td class="text-end"><label class="fw-semibold" for="name">{{__('unlogged.input.name')}}</label></td>
                         <td><input class="form-control w-50" type="text" name="name" id="name" value="{{Auth::user()->name}}"></td>
                     </tr>
                     <tr>
-                        <td class="text-end"><label class="fw-semibold" for="email">Email</label></td>
+                        <td class="text-end"><label class="fw-semibold" for="email">{{__('unlogged.input.email')}}</label></td>
                         <td><input class="form-control w-50" type="email" name="email" id="email" value="{{Auth::user()->email}}"></td>
                     </tr>
                     <tr>
-                        <td class="text-end"><label class="fw-semibold" for="phone">Phone number</label></td>
+                        <td class="text-end"><label class="fw-semibold" for="phone">{{__('unlogged.input.phone')}}</label></td>
                         <td><input class="form-control w-50" type="text" name="phone" id="phone" value="{{Auth::user()->phone}}"></td>
                     </tr>
                     <tr>
-                        <td class="text-end"><label class="fw-semibold" for="gender">Gender</label></td>
+                        <td class="text-end"><label class="fw-semibold" for="gender">{{__('unlogged.input.gender')}}</label></td>
                         <td><select class="form-control w-50" name="gender" id="gender">
-                            <option value="male" {{ strcasecmp(Auth::user()->gender, "male") == 0 ? 'selected' : ''}}>Male</option>
-                            <option value="female" {{ strcasecmp(Auth::user()->gender, "female") == 0 ? 'selected' : '' }}>Female</option>
+                            <option value="male" {{ strcasecmp(Auth::user()->gender, "male") == 0 ? 'selected' : ''}}>{{__('unlogged.input.gender_choices.male')}}</option>
+                            <option value="female" {{ strcasecmp(Auth::user()->gender, "female") == 0 ? 'selected' : '' }}>{{__('unlogged.input.gender_choices.female')}}</option>
                         </select></td>
                     </tr>
                     <tr>
-                        <td class="text-end"><label class="fw-semibold" for="dob">Date of birth</label></td>
+                        <td class="text-end"><label class="fw-semibold" for="dob">{{__('unlogged.input.dob')}}</label></td>
                         <td><input class="form-control w-50" type="text" name="dob" id="dob" value="{{Auth::user()->dob}}"></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input class="btn btn-3" type="submit" value="Submit"></td>
+                        <td><input class="btn btn-3" type="submit" value="{{__('unlogged.input.save')}}"></td>
                     </tr>
                 </tbody>
             </table>

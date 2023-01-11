@@ -19,77 +19,70 @@
                             @csrf
                             <div class="form-floating mb-2">
                                 <input type="email" class="form-control" id="email_login" name="email_login" placeholder="Email address">
-                                <label for="email_login">Email address</label>
+                                <label for="email_login">{{ __('unlogged.input.email') }}</label>
                             </div>
                             <div class="form-floating mb-2">
                                 <input type="password" class="form-control" id="password_login" name="password_login" placeholder="Password">
-                                <label for="password_login">Password</label>
+                                <label for="password_login">{{ __('unlogged.input.password') }}</label>
                             </div>
                             <div class="my-2 align-middle">
-                                <input class="form-check-input me-1" type="checkbox" name="remember" id="remember"><label class="" for="remember"> Remember Me</label>
+                                <input class="form-check-input me-1" type="checkbox" name="remember" id="remember"><label class="" for="remember"> {{ __('unlogged.input.remember') }}</label>
                             </div>
                             <div class="my-2">
-                                <input class="form-control btn btn-3 py-2" type="submit" value="Log In">
+                                <input class="form-control btn btn-3 py-2" type="submit" value="{{ __('unlogged.input.login') }}">
                             </div>
                         </form>
                         <hr>
                         <div class="px-3 text-center">
-                            Don't have an account?
+                            {{ __('unlogged.input.caption') }}
                             <button type="button" class="border-0 hover-none text-color-3" data-bs-toggle="modal" data-bs-target="#registerModal">
-                                Register
+                                {{ __('unlogged.input.register') }}
                             </button>
                         </div>
                         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-md modal-dialog-centered">
                                 <div class="modal-content">
-                                    <form enctype="multipart/form-data" action="/register" method="POST" >
+                                    <form name="register" enctype="multipart/form-data" action="/register" method="POST" >
                                         @csrf
                                         <div class="modal-header border-0">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Create new account</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ __('unlogged.title') }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-floating mb-2">
                                                 <input type="text" class="form-control" id="name" name="name" placeholder="Full name">
-                                                <label for="name">Full name</label>
+                                                <label for="name">{{ __('unlogged.input.name') }}</label>
                                             </div>
                                             <div class="form-floating mb-2">
                                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email address">
-                                                <label for="email">Email address</label>
+                                                <label for="email">{{ __('unlogged.input.email') }}</label>
                                             </div>
                                             <div class="form-floating mb-2">
                                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                                <label for="password">Password</label>
+                                                <label for="password">{{ __('unlogged.input.password') }}</label>
                                             </div>
                                             <div class="form-floating mb-2">
                                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation">
-                                                <label for="password_confirmation">Confirm Password</label>
+                                                <label for="password_confirmation">{{ __('unlogged.input.password_confirmation') }}</label>
                                             </div>
                                             <div class="form-floating mb-1">
                                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
-                                                <label for="phone">Phone number</label>
+                                                <label for="phone">{{ __('unlogged.input.phone') }}</label>
                                             </div>
-                                            <div class="mb-2 justify-content-center position-relative">
-                                                <span class="text-start mb-1 ml-1">Gender</span>
-                                                <div class="d-flex text-center">
-                                                    <div class="py-2 px-0 gender mx-1">
-                                                        <label class="p-auto" for="male">Male</label>
-                                                        <input class="form-check-input clamp-right" type="radio" name="gender" id="male">
-                                                    </div>
-                                                    <div class="py-2 px-0 gender mx-1">
-                                                        <label for="female">Female</label>
-                                                        <input class="form-check-input clamp-right" type="radio" name="gender" id="female">
-                                                    </div>
-                                                </div>
-
+                                            <div class="mb-1">
+                                                <label for="gender" class="mb-1">{{ __('unlogged.input.gender')}}</label>
+                                                <select class="form-control" name="gender" id="gender">
+                                                    <option value="male">{{__('unlogged.input.gender_choices.male')}}</option>
+                                                    <option value="female">{{__('unlogged.input.gender_choices.female')}}</option>
+                                                </select>
                                             </div>
                                             <div class="mb-2">
-                                                <span class=" align-self-start mb-1 ml-1">Date of Birth</span>
+                                                <span class=" align-self-start mb-1 ml-1">{{ __('unlogged.input.dob') }}</span>
                                                 <input class="form-control py-2" type="date" name="dob" id="dob" placeholder="Date of Birth">
                                             </div>
                                         </div>
                                         <div class="modal-footer border-0">
-                                            <button type="submit" class="form-control btn btn-3">Register</button>
+                                            <button type="submit" class="form-control btn btn-3">{{ __('unlogged.input.register') }}</button>
                                         </div>
                                     </form>
                                 </div>

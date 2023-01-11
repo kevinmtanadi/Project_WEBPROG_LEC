@@ -9,7 +9,7 @@
                         </a>
                     </div>
                     <form action="/searchPeople">
-                        <input class="form-control" type="text" name="search" id="search" placeholder="Search for people">
+                        <input class="form-control" type="text" name="search" id="search" placeholder="{{__('navbar.search')}}">
                     </form>
                 </div>
                 <div class="col-6 justify-content-center d-flex align-items-center">
@@ -29,9 +29,9 @@
                     </button>
                     <div class="dropdown">
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="/profile/{{Auth::user()->id}}">Profile</a></li>
+                          <li><a class="dropdown-item" href="/profile/{{Auth::user()->id}}">{{__('navbar.profile')}}</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                          <li><a class="dropdown-item" href="/logout">{{__('navbar.logout')}}</a></li>
                         </ul>
                     </div>
                 </div>

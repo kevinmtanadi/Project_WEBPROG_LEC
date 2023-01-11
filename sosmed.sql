@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2023 at 02:55 PM
+-- Generation Time: Jan 11, 2023 at 08:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,7 +40,6 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `user_id`, `post_id`, `comment`, `posted_at`) VALUES
-(1, 1, 1, 'agree', '2023-01-09 00:43:06'),
 (2, 1, 1, 'test2', '2023-01-09 00:44:41'),
 (3, 1, 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas atque temporibus facilis ipsum voluptates tempore laborum. Pariatur magni distinctio molestiae maxime recusandae nulla dignissimos odio magnam natus eaque quis, facilis reiciendis fugit adipisci unde vitae veritatis non cumque esse, quaerat perferendis culpa aliquid soluta quod. Quae ea necessitatibus veniam suscipit nam vero fugit magni nemo esse dignissimos sapiente et corrupti, aliquam itaque blanditiis magnam tempore placeat excepturi natus in cupiditate?', '2023-01-09 01:06:44'),
 (4, 1, 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio ipsa nulla ratione reiciendis? Quo pariatur veniam ratione deleniti rerum saepe similique voluptates debitis possimus nemo dolorum sequi id aspernatur, harum minus sed amet nobis reprehenderit perferendis, eveniet facilis animi ipsam in repudiandae! Harum, laborum vitae beatae quae quia voluptate commodi enim officiis, sed expedita vel laboriosam itaque, quasi accusantium temporibus corporis eum libero? Modi laborum, expedita magnam amet, quibusdam numquam quos ullam accusantium esse natus error animi nobis? Sint, numquam!', '2023-01-09 01:10:14'),
@@ -51,7 +50,8 @@ INSERT INTO `comment` (`id`, `user_id`, `post_id`, `comment`, `posted_at`) VALUE
 (9, 1, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate hic, nesciunt iure a nulla repellendus doloribus eum numquam cupiditate tenetur! Praesentium esse cupiditate, consequatur sequi consectetur magnam, ut ad molestiae fugiat dolore ex vel ab ea consequuntur omnis ratione, deserunt labore. Dolores aut cupiditate quisquam quis ducimus facilis delectus minima ea, iusto velit. Numquam pariatur aliquid, asperiores quidem doloremque fugit?', '2023-01-09 01:25:13'),
 (10, 1, 1, 'agreed!', '2023-01-09 02:15:10'),
 (11, 1, 1, 'asdawdddddddddddddddddddddddddddddddddddddddddddddddd', '2023-01-09 05:48:12'),
-(12, 1, 1, 'test', '2023-01-09 06:24:45');
+(12, 1, 1, 'test', '2023-01-09 06:24:45'),
+(13, 3, 6, 'yes!', '2023-01-10 10:40:06');
 
 -- --------------------------------------------------------
 
@@ -72,9 +72,9 @@ CREATE TABLE `comment_like` (
 --
 
 INSERT INTO `comment_like` (`id`, `user_id`, `comment_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, NULL, NULL),
 (2, 1, 4, NULL, NULL),
-(3, 1, 8, NULL, NULL);
+(3, 1, 8, NULL, NULL),
+(4, 1, 13, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,7 +195,11 @@ CREATE TABLE `post` (
 
 INSERT INTO `post` (`id`, `user_id`, `content_url`, `caption`, `posted_at`) VALUES
 (1, 1, 'post_1673249920.jpg', 'Greatest woman alive!', '2023-01-09 00:38:40'),
-(2, 1, 'post_1673252500.jpg', 'Watching this right now!', '2023-01-09 01:21:40');
+(2, 1, 'post_1673252500.jpg', 'Watching this right now!', '2023-01-09 01:21:40'),
+(3, 2, 'post_1673276342.jpg', 'test123', '2023-01-09 07:59:02'),
+(4, 1, 'post_1673342364.jpg', 'actor of the year!', '2023-01-10 02:19:24'),
+(5, 1, 'post_1673342381.jpg', 'ttt', '2023-01-10 02:19:41'),
+(6, 1, 'post_1673342393.jpg', 'watch!!!', '2023-01-10 02:19:53');
 
 -- --------------------------------------------------------
 
@@ -216,8 +220,11 @@ CREATE TABLE `post_like` (
 --
 
 INSERT INTO `post_like` (`id`, `user_id`, `post_id`, `created_at`, `updated_at`) VALUES
-(3, 1, 2, NULL, NULL),
-(4, 1, 1, NULL, NULL);
+(4, 1, 1, NULL, NULL),
+(7, 2, 2, NULL, NULL),
+(9, 1, 2, NULL, NULL),
+(10, 3, 6, NULL, NULL),
+(11, 1, 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -234,7 +241,6 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `dob` date NOT NULL,
   `profile_pic` varchar(255) NOT NULL,
-  `banner_pic` varchar(255) DEFAULT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'member',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `remember_token` varchar(100) DEFAULT NULL
@@ -244,9 +250,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `gender`, `password`, `dob`, `profile_pic`, `banner_pic`, `role`, `created_at`, `remember_token`) VALUES
-(1, 'Kevin Miguel Tanadi', 'kevinmt2342@gmail.com', '0895612491823', 'on', '$2y$10$vPjRkp1bjVtwKWN4TyJ1junTRDaRq8rMFdi7mvZdlOa40oyEjqL6u', '2002-04-23', 'profile.jpg', 'banner.jpg', 'member', '2023-01-09 13:51:38', 'dsDy5lb9W2uaJ9FN2GpHpdYxq6wFylK3IkYegSxd7M46GNZpFOIY5vjfykC8'),
-(2, 'Muhammad Farras', 'm.faras@gmail.com', '081234567890', 'on', '$2y$10$3tlAC2Cw675gh1sHdphneOB06kD3m3OFxAu9rcmJDSyMhhW/VHo8m', '2002-12-23', 'profile.jpg', 'banner.jpg', 'member', '2023-01-09 06:52:11', NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `gender`, `password`, `dob`, `profile_pic`, `role`, `created_at`, `remember_token`) VALUES
+(1, 'Kevin Miguel Tanadi', 'tradeable2342@gmail.com', '0895612491823', 'male', '$2y$10$vPjRkp1bjVtwKWN4TyJ1junTRDaRq8rMFdi7mvZdlOa40oyEjqL6u', '2002-04-23', 'profilepic_1673353051.jpg', 'member', '2023-01-11 07:05:28', 'rNyPWMvtNURAVbT9NxCgilIJ2F7wqOoO9FPMxjeGikan8nh8PvTCTM6l2KI6'),
+(2, 'Muhammad Farras', 'm.faras@gmail.com', '081234567890', 'male', '$2y$10$3tlAC2Cw675gh1sHdphneOB06kD3m3OFxAu9rcmJDSyMhhW/VHo8m', '2002-12-23', 'profile.jpg', 'member', '2023-01-10 13:37:51', 'EHqtu1m7N2JRMjogykSGnqO0vmfoBpbVhNo1939u8xjfoLi4Mg6mr2YCzsxl'),
+(3, 'admin', 'admin@example.com', 'none', 'male', '$2y$10$Af8AQeeER9gMKg75hV30BeABxfMyCfPv.m6Yt8.4qvvsWVJpCyx.q', '2023-01-10', 'profilepic_1673372427.jpg', 'admin', '2023-01-11 07:05:38', 'kOnBF4JGYPBJqou3mZoEXmIaBOXJgXqHmbXFXqDTRgdSYHF6twDdgdoWd5rv'),
+(4, 'Ferdinal Alvino', 'ferdinal@gmail.com', '0812345612345', 'on', '$2y$10$lN8RX1FKKsZ6u3nXTpyReuikkyXO/OmX1DUmicSHOtdsQsbEubFoW', '2023-01-04', 'profile.jpg', 'member', '2023-01-10 07:06:56', NULL),
+(5, 'gegek', 'gegek@gma', '12313123123123', 'female', '$2y$10$/3xNyTgbIDtTCXC7aJzd2OsrKeRLUsbLsuIA1/UGU0656ztQcI7jC', '2022-12-25', 'profile.jpg', 'member', '2023-01-11 07:09:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -341,13 +350,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `comment_like`
 --
 ALTER TABLE `comment_like`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -359,13 +368,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `friend`
 --
 ALTER TABLE `friend`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `friend_request`
 --
 ALTER TABLE `friend_request`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -383,19 +392,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `post_like`
 --
 ALTER TABLE `post_like`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

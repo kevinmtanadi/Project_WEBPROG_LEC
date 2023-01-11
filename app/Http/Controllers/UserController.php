@@ -41,11 +41,10 @@ class UserController extends Controller
     }
 
     public function homepage() {
-        if (Auth::user()->role == 'admin') {
-            return $this->adminPage();
-        }
-
         if (Auth::check()) {
+            if (Auth::user()->role == 'admin') {
+                return $this->adminPage();
+            }
             return $this->showPost();
         }
         else {
@@ -85,6 +84,13 @@ class UserController extends Controller
         $user = User::where('email', $req->email)->first();
 
         Auth::loginUsingId($user->id);
+
+        $credentials = [
+            'email' => $req->email_login,
+            'password' => $req->password_login
+        ];
+
+        Session::put('mysession', $credentials);
 
         return redirect('/');
     }

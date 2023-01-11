@@ -38,11 +38,11 @@
                                     }
                                 @endphp
                                 @if (in_array($people->id, $friends_id))
-                                    <a class="btn btn-danger" href="/removeFriend/{{$people->id}}">Unfriend</a>
+                                    <a class="btn btn-danger" href="/removeFriend/{{$people->id}}">{{__('people.remove_friend')}}</a>
                                 @elseif (in_array($people->id, $friend_reqs_id))
-                                    <a class="btn btn-secondary" href="/cancelFriendRequest/{{$people->id}}">Friend Request Sent</a>
+                                    <a class="btn btn-secondary" href="/cancelFriendRequest/{{$people->id}}">{{__('people.friend_req')}}</a>
                                 @else
-                                    <a class="btn btn-3" href="/addFriend/{{$people->id}}">Add Friend</a>
+                                    <a class="btn btn-3" href="/addFriend/{{$people->id}}">{{__('people.add_friend')}}</a>
                                 @endif
                             </div>
                         </div>

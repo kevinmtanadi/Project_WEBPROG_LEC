@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="status">
-                                {{ $post->likes->count() }} likes
+                                {{ $post->likes->count() }} {{__('home.like')}}
                             </div>
                             <div class="card-text">
                                 <div class="">
@@ -92,7 +92,7 @@
                             <div class="comment mt-3">
                                 <form action="/addComment/{{$post->id}}" method="POST" class="mt-3 d-flex">
                                     @csrf
-                                    <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);" placeholder="Add your comment"></textarea>
+                                    <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);" placeholder="{{__('home.comment')}}"></textarea>
                                     <div class="d-flex ms-2">
                                         <input class="my-auto border-0 hover-none focus-none text-color-3" type="submit" value="Post">
                                     </div>
@@ -168,10 +168,8 @@
                                                                 @endphp
                                                                 <div class="d-flex">
                                                                     <span class="comment-status me-2">{{ $time }}</span>
-                                                                    @if ($comment->likes->count() > 1)
-                                                                    <span class="comment-status fw-semibold">{{ $comment->likes->count() }} likes</span>
-                                                                    @elseif ($comment->likes->count() > 0)
-                                                                    <span class="comment-status fw-semibold">{{ $comment->likes->count() }} like</span>
+                                                                    @if ($comment->likes->count() > 0)
+                                                                    <span class="comment-status fw-semibold">{{ $comment->likes->count() }} {{__('home.like')}}</span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -210,11 +208,11 @@
                                                             </button>
                                                         </div>
                                                         <div class="status">
-                                                            {{ $post->likes->count() }} likes
+                                                            {{ $post->likes->count() }} {{__('home.like')}}
                                                         </div>
                                                         <form action="/addComment/{{$post->id}}" method="POST" class="mt-3 d-flex">
                                                             @csrf
-                                                            <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);" placeholder="Add your comment"></textarea>
+                                                            <textarea class="form-control" name="comment" id="comment" style="height: 28px" oninput="auto_grow(this);" placeholder="{{__('home.comment')}}"></textarea>
                                                             <div class="d-flex ms-2">
                                                                 <input class="my-auto border-0 hover-none focus-none text-color-3" type="submit" value="Post">
                                                             </div>
@@ -233,7 +231,7 @@
                 @endforeach
             </div>
             <div class="col-xl-3 col-lg-3 col-sm-4 col-0">
-                <h5 class="fw-semibold mb-2">Friends</h5>
+                <h5 class="fw-semibold mb-2">{{__('home.friend')}}</h5>
                 @foreach (Auth::user()->friends as $friend)
                 <div class="d-flex align-items-center">
                     <a href="/profile/{{$friend->friend->id}}">

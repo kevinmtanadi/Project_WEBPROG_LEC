@@ -32,11 +32,11 @@
                         @endphp
                         <div class="me-5">
                             @if (in_array($account->id, $friends_id))
-                                <a class="btn btn-danger" href="/removeFriend/{{$account->id}}">Unfriend</a>
+                                <a class="btn btn-danger" href="/removeFriend/{{$account->id}}">{{__('people.remove_friend')}}</a>
                             @elseif (in_array($account->id, $friend_reqs_id))
-                                <a class="btn btn-secondary" href="/cancelFriendRequest/{{$account->id}}">Friend Request Sent</a>
+                                <a class="btn btn-secondary" href="/cancelFriendRequest/{{$account->id}}">{{__('people.friend_req')}}</a>
                             @else
-                                <a class="btn btn-3" href="/addFriend/{{$account->id}}">Add Friend</a>
+                                <a class="btn btn-3" href="/addFriend/{{$account->id}}">{{__('people.add_friend')}}</a>
                             @endif
                         </div>
                         @else
@@ -47,10 +47,10 @@
                     </div>
                     <div class="row align-items-end align-items-center">
                         <div class="col-2">
-                            <span class="fs-4 me-1">{{$account->posts->count()}}</span><span class="fw-light">posts</span>
+                            <span class="fs-4 me-1">{{$account->posts->count()}}</span><span class="fw-light">{{__('profile.post')}}</span>
                         </div>
                         <div class="col-2">
-                            <span class="fs-4 me-1">{{$account->friends->count()}}</span><span class="fw-light">friends</span>
+                            <span class="fs-4 me-1">{{$account->friends->count()}}</span><span class="fw-light">{{__('profile.friend')}}</span>
                         </div>
                     </div>
                 </div>
