@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Friend;
+use App\Models\FriendRequest;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
@@ -33,9 +34,11 @@ class UserController extends Controller
             ->orWhereIn('user_id', $friends_id)->orderBy('posted_at', 'desc')
             ->get();
 
+        $friend_reqs = FriendRequest::where('friend_id', $user->id)->get();
+
         App::setLocale(Session::get('mylocale'));
 
-        return view('home', ['posts' => $posts]);
+        return view('home', ['posts' => $posts, 'friend_reqs' => $friend_reqs]);
     }
 
     public function adminPage() {

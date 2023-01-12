@@ -12,10 +12,14 @@
                 <div class="col-1 col-md-3 col-xl-4"></div>
                 <div class="col-10 col-md-6 col-xl-4">
                     <div class="mx-auto py-3 box bg-0">
-                        @if ($errors->any())
-                            <strong>{{$errors->first()}}</strong>
-                        @endif
+
                         <form class="my-3 px-3" action="/login" method="POST" enctype="multipart/form-data">
+                            <div class="d-flex justify-content-center mb-4">
+                                <img width="60px" src="{{ Storage::url('public/images/logo/circialtext.svg') }}" alt="">
+                            </div>
+                            @if ($errors->any())
+                                <strong>{{$errors->first()}}</strong>
+                            @endif
                             @csrf
                             <div class="form-floating mb-2">
                                 <input type="email" class="form-control" id="email_login" name="email_login" placeholder="Email address">
@@ -26,7 +30,7 @@
                                 <label for="password_login">{{ __('unlogged.input.password') }}</label>
                             </div>
                             <div class="my-2 align-middle">
-                                <input class="form-check-input me-1" type="checkbox" name="remember" id="remember"><label class="" for="remember"> {{ __('unlogged.input.remember') }}</label>
+                                <input class="form-check-input me-1" type="checkbox" name="remember" id="remember" checked={{Cookie::get('mycookie') !== null}}><label class="" for="remember"> {{ __('unlogged.input.remember') }}</label>
                             </div>
                             <div class="my-2">
                                 <input class="form-control btn btn-3 py-2" type="submit" value="{{ __('unlogged.input.login') }}">

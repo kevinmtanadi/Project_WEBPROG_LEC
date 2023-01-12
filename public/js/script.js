@@ -46,9 +46,11 @@ function displayImage() {
         `
     }
     else {
+        output.innerHTML = "";
+        output.style.display = 'none';
+        footer.innerHTML = "";
+        caption.style.display = "none";
         alert("File type unsupported!");
-        drop.classList.remove('active');
-        text.textContent = "Drag and drop your photo here!"
     }
 
 }

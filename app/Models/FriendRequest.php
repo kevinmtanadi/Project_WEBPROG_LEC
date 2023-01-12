@@ -11,11 +11,11 @@ class FriendRequest extends Model
 
     protected $table = 'friend_request';
 
-    public function sender() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function recipient() {
+    public function friend() {
         return $this->belongsTo(User::class);
     }
 }

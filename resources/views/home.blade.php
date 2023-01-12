@@ -232,15 +232,31 @@
                 @endforeach
             </div>
             <div class="col-xl-3 col-lg-3 col-sm-4 col-0">
-                <h5 class="fw-semibold mb-2">{{__('home.friend')}}</h5>
-                @foreach (Auth::user()->friends as $friend)
-                <div class="d-flex align-items-center">
-                    <a href="/profile/{{$friend->friend->id}}">
-                        <img class="profile-2 me-2" src="{{Storage::url('public/images/profile/'.$friend->friend->profile_pic)}}" alt="">
-                        {{ $friend->friend->name }}
-                    </a>
+                @if (count($friend_reqs) > 0)
+                <div class="mb-2">
+                    <h5 class="fw-semibold mb-2">{{__('home.friend_req')}}</h5>
+                    @foreach ($friend_reqs as $friend_req)
+                    <div class="d-flex align-items-center justify-content-between">
+                        <a class="mb-2" href="/profile/{{$friend_req->user->id}}">
+                            <img class="profile-2 me-2" src="{{Storage::url('public/images/profile/'.$friend_req->user->profile_pic)}}" alt="">
+                            {{ $friend_req->user->name }}
+                        </a>
+                        <a class="btn btn-3" href="/addFriend/{{$friend_req->user->id}}">Accept</a>
+                    </div>
+                    @endforeach
                 </div>
-                @endforeach
+                @endif
+                <div class="mb-2">
+                    <h5 class="fw-semibold mb-2">{{__('home.friend')}}</h5>
+                    @foreach (Auth::user()->friends as $friend)
+                    <div class="d-flex align-items-center">
+                        <a class="mb-2" href="/profile/{{$friend->friend->id}}">
+                            <img class="profile-2 me-2" src="{{Storage::url('public/images/profile/'.$friend->friend->profile_pic)}}" alt="">
+                            {{ $friend->friend->name }}
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
